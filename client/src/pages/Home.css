@@ -1,5 +1,13 @@
-.qw {
-  background-image: url("../assets/bg.png");
+.bg-home {
+  background-image: url("../assets/images/cartsListBG.png");
   background-size: cover;
   height: 91.6vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.offDecorationLine {
+  text-decoration: none;
+  color: #fff;
 }

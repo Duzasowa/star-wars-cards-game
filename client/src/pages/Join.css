@@ -1,0 +1,8 @@
+.bg-join {
+  background-image: url("../assets/images/join2.png");
+  background-size: cover;
+  height: 91.6vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

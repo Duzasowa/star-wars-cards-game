@@ -12,31 +12,33 @@ const Navbar = () => {
           <Logo />
         </Link>
 
-        <label class="navbar-toggler" for="toggle">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
+        <label className="navbar-toggler" htmlFor="toggle">
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
         </label>
 
-        <ul class="nav-list">
-          <div class="nav-item">
-            <Link to={"/"} class="nav-link">
-              Home page
-            </Link>
-          </div>
-          <div class="nav-item">
-            <Link class="nav-link">In progress...</Link>
-          </div>
-          <div class="nav-item">
-            <Link to={"/cart-list"} class="nav-link">
-              Collection cart
-            </Link>
-          </div>
-          <div class="nav-item">
-            <Link to={"*"} class="nav-link">
-              Contact
-            </Link>
-          </div>
+        <ul className="nav-list">
+          <Link to={"/"} className="offDecorationLine">
+            <div className="nav-item">
+              <div className="nav-link">Home page</div>
+            </div>
+          </Link>
+          <Link to={"/"} className="offDecorationLine">
+            <div className="nav-item">
+              <div className="nav-link">Featured</div>
+            </div>
+          </Link>
+          <Link to={"/cart-list"} className="offDecorationLine">
+            <div className="nav-item">
+              <div className="nav-link">Collection cart</div>
+            </div>
+          </Link>
+          <Link to={"*"} className="offDecorationLine">
+            <div className="nav-item">
+              <div className="nav-link">Contact</div>
+            </div>
+          </Link>
         </ul>
       </nav>
     </>
