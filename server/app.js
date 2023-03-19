@@ -1,5 +1,6 @@
 import express from "express";
 import userRouter from "./routes/userRouter.js";
+import cardRouter from "./routes/cardRouter.js";
 
 const app = express();
 
@@ -13,5 +14,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/cards", cardRouter);
 
 export default app;
