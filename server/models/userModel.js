@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema({
     maxlength: [15, "A user name must have less or equal then 15 characters"],
     minlength: [5, "A user name must have less or equal then 5 characters"],
   },
+  numberWins: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const User = mongoose.model("User", userSchema);

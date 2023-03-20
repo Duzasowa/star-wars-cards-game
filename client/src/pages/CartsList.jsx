@@ -26,7 +26,7 @@ const Container = styled(Box)({
   padding: "20px",
 });
 
-const CardContainer = styled(Card)({
+export const CardContainer = styled(Card)({
   backgroundColor: "white",
   maxWidth: "300px",
   margin: "20px",
@@ -34,7 +34,7 @@ const CardContainer = styled(Card)({
   height: "90%",
 });
 
-const CardContentContainer = styled(CardContent)({
+export const CardContentContainer = styled(CardContent)({
   padding: 0,
   textAlign: "center",
   textTransform: "uppercase",

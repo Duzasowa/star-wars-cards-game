@@ -1,7 +1,7 @@
-.bg-join {
-  background-image: url("../assets/images/bg-Join.png");
+.bg-game {
+  background-image: url("../assets/images/bg-Game.png");
   background-size: cover;
-  height: 91.6vh;
+  height: 92vh;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -78,10 +78,17 @@ const Home = () => {
                 primary={`Players: ${numUsers.result}`}
               />
             </ListItemButton>
-            <ListItemButton sx={{ "&:hover": { backgroundColor: "#b69955" } }}>
-              <LocalFireDepartmentIcon style={iconStyle} />
-              <ListItemText sx={{ marginLeft: 2 }} primary="Find next match" />
-            </ListItemButton>
+            <Link to={`/game`} className="offDecorationLine">
+              <ListItemButton
+                sx={{ "&:hover": { backgroundColor: "#b69955" } }}
+              >
+                <LocalFireDepartmentIcon style={iconStyle} />
+                <ListItemText
+                  sx={{ marginLeft: 2 }}
+                  primary="Find next match"
+                />
+              </ListItemButton>
+            </Link>
           </List>
         </Card>
       </div>

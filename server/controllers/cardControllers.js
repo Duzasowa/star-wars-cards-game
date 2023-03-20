@@ -22,3 +22,9 @@ export const createCard = async (req, res) => {
     },
   });
 };
+
+export const getOneRandomCard = async (req, res) => {
+  const card = await Card.aggregate([{ $sample: { size: 2 } }]);
+
+  res.status(200).json(card);
+};
