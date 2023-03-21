@@ -14,7 +14,6 @@ function App() {
         <Route path="/cart-list" element={<CartsList />} />
         <Route path="/joinToEmpireArmy" element={<Join />} />
         <Route path="/game" element={<Game />} />
-
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

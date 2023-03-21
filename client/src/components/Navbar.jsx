@@ -19,26 +19,26 @@ const Navbar = () => {
         </label>
 
         <ul className="nav-list">
-          <Link to={"/"} className="offDecorationLine">
-            <div className="nav-item">
+          <li>
+            <Link to={"/"} className="offDecorationLine nav-item">
               <div className="nav-link">Home page</div>
-            </div>
-          </Link>
-          <Link to={"/"} className="offDecorationLine">
-            <div className="nav-item">
+            </Link>
+          </li>
+          <li>
+            <Link to={"/"} className="offDecorationLine nav-item">
               <div className="nav-link">Featured</div>
-            </div>
-          </Link>
-          <Link to={"/cart-list"} className="offDecorationLine">
-            <div className="nav-item">
+            </Link>
+          </li>
+          <li>
+            <Link to={"/cart-list"} className="offDecorationLine nav-item">
               <div className="nav-link">Collection cart</div>
-            </div>
-          </Link>
-          <Link to={"*"} className="offDecorationLine">
-            <div className="nav-item">
+            </Link>
+          </li>
+          <li>
+            <Link to={"*"} className="offDecorationLine nav-item">
               <div className="nav-link">Contact</div>
-            </div>
-          </Link>
+            </Link>
+          </li>
         </ul>
       </nav>
     </>

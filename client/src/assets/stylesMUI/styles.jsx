@@ -39,7 +39,6 @@ export const stylesMain = {
     flexDirection: "column",
     alignItems: "center",
     borderRadius: "10px",
-    // justifyContent: "center",
   },
   cardText: {
     width: "90%",
@@ -56,4 +55,42 @@ export const stylesMain = {
     justifyContent: "center",
     alignItems: "center",
   },
+};
+
+// JOIN.jsx
+export const textFieldStyle = {
+  "& .MuiFilledInput-root": {
+    backgroundColor: "white",
+    "&:hover": {
+      backgroundColor: "#b69955",
+    },
+    "&.Mui-focused": {
+      backgroundColor: "white",
+    },
+  },
+};
+
+// CARTLIST.jsx
+export const Container = {
+  borderRadius: "10px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100%",
+  padding: "20px",
+};
+
+export const CardContainer = {
+  backgroundColor: "white",
+  maxWidth: "300px",
+  margin: "20px",
+  borderRadius: "10px",
+  height: "90%",
+};
+
+export const CardContentContainer = {
+  padding: 0,
+  textAlign: "center",
+  textTransform: "uppercase",
+  fontWeight: "bold",
 };

@@ -8,32 +8,53 @@ import {
   TextField,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { cardStyle } from "../assets/stylesMUI/styles";
+import { cardStyle, textFieldStyle } from "../assets/stylesMUI/styles";
 import Navbar from "../components/Navbar";
 import "./Join.css";
 
 const Join = () => {
   const [name, setName] = useState("");
   const [alertOpen, setAlertOpen] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState("success");
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleButtonClick = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:5000/api/v1/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name }),
-      });
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
+    if (name.length < 5 || name.length > 15) {
+      setAlertSeverity("error");
+      setAlertMessage("Error: Name must be between 5 and 15 characters long.");
+    } else {
+      try {
+        await fetch("http://localhost:5000/api/v1/users", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name }),
+        });
+        setAlertSeverity("success");
+        setAlertMessage("Query processed successfully!");
+      } catch (error) {
+        console.error(error);
+        setAlertSeverity("error");
+        setAlertMessage("Error: Failed to process query.");
+      }
+      setName("");
     }
-    setName("");
     setAlertOpen(true);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // заборонити Enter в полі
+      event.target.blur(); // зняти фокус з поля
+    }
+  };
+
   const handleAlertClose = () => {
+    setAlertOpen(false); // hide the alert
+  };
+
+  const handleResetButtonClick = () => {
+    setName("");
     setAlertOpen(false); // hide the alert
   };
 
@@ -41,21 +62,12 @@ const Join = () => {
     <>
       <Navbar />
       <div className="bg-join">
-        <Card style={cardStyle}>
+        <Card sx={cardStyle}>
           <List aria-label="mailbox folders">
             <Box sx={{ width: 200 }}>
               <TextField
-                sx={{
-                  "& .MuiFilledInput-root": {
-                    backgroundColor: "white", // change the background color
-                    "&:hover": {
-                      backgroundColor: "#b69955", // change the background color on hover
-                    },
-                    "&.Mui-focused": {
-                      backgroundColor: "white", // change the background color when focused
-                    },
-                  },
-                }}
+                onKeyPress={handleKeyPress}
+                sx={textFieldStyle}
                 id="filled-textarea"
                 label="Join the Empire!"
                 variant="filled"
@@ -73,7 +85,11 @@ const Join = () => {
               >
                 Join
               </Button>
-              <Button sx={{ width: "100px" }} variant="outlined">
+              <Button
+                onClick={handleResetButtonClick}
+                sx={{ width: "100px" }}
+                variant="outlined"
+              >
                 Reset
               </Button>
             </Box>
@@ -84,8 +100,10 @@ const Join = () => {
             onClose={handleAlertClose}
           >
             <SnackbarContent
-              style={{ backgroundColor: "green" }} // set the background color
-              message="Query processed successfully!"
+              style={{
+                backgroundColor: alertSeverity === "error" ? "red" : "green",
+              }}
+              message={alertMessage}
             />
           </Snackbar>
         </Card>

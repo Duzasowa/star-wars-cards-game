@@ -23,10 +23,12 @@ const Home = () => {
 
   useEffect(() => {
     const loadUsersData = async () => {
-      return await axios
-        .get(`http://localhost:5000/api/v1/users`)
-        .then((response) => setNumUser(response.data))
-        .catch((err) => err);
+      try {
+        const response = await axios.get(`http://localhost:5000/api/v1/users`);
+        setNumUser(response.data);
+      } catch (err) {
+        console.log(err);
+      }
     };
     loadUsersData();
   }, []);
@@ -75,7 +77,9 @@ const Home = () => {
               <PeopleAltIcon style={iconStyle} />
               <ListItemText
                 sx={{ marginLeft: 2 }}
-                primary={`Players: ${numUsers.result}`}
+                primary={`Players: ${
+                  numUsers.result ? numUsers.result : "Loading..."
+                }`}
               />
             </ListItemButton>
             <Link to={`/game`} className="offDecorationLine">

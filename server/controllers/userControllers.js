@@ -1,6 +1,7 @@
 import User from "../models/userModel.js";
+import { tryCatchAsync } from "../routes/tryCatchAsync.js";
 
-export const createUser = async (req, res) => {
+export const createUser = tryCatchAsync(async (req, res) => {
   const newUser = await User.create(req.body);
 
   res.status(201).json({
@@ -9,9 +10,9 @@ export const createUser = async (req, res) => {
       user: newUser,
     },
   });
-};
+});
 
-export const getNumUser = async (req, res) => {
+export const getNumUser = tryCatchAsync(async (req, res) => {
   const users = await User.find(req.query);
 
   res.status(200).json({
@@ -21,9 +22,9 @@ export const getNumUser = async (req, res) => {
       users,
     },
   });
-};
+});
 
-export const updateUserWins = async (req, res) => {
+export const updateUserWins = tryCatchAsync(async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(
       req.params.id,
@@ -42,4 +43,4 @@ export const updateUserWins = async (req, res) => {
   } catch (error) {
     res.status(400).json({ message: "Update failed" });
   }
-};
+});

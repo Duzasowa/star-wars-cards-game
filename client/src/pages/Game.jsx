@@ -16,36 +16,35 @@ const Game = () => {
   const [usersSelected, setUsersSelected] = useState(false);
 
   useEffect(() => {
-    const loadUsersData = async () => {
+    const loadData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/v1/users`);
-        setUsers(response.data.data.users);
+        const usersResponse = await axios.get(
+          `http://localhost:5000/api/v1/users`
+        );
+        const cardsResponse = await axios.get(
+          `http://localhost:5000/api/v1/cards/random`
+        );
+        setUsers(usersResponse.data.data.users);
+        setCard(cardsResponse.data);
       } catch (err) {
         console.log(err);
       }
     };
-    loadUsersData();
-    const loadRamdonCardData = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/v1/cards/random"
-        );
-        setCard(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    loadRamdonCardData();
+    loadData();
   }, []);
 
   const handleUserChange1 = (event) => {
-    setSelectedUser1(event.target.value);
-    setUsersSelected(selectedUser2 !== null && event.target.value !== null);
+    setSelectedUser1((prev) => event.target.value);
+    setUsersSelected(
+      (prev) => selectedUser2 !== null && event.target.value !== null
+    );
   };
 
   const handleUserChange2 = (event) => {
-    setSelectedUser2(event.target.value);
-    setUsersSelected(selectedUser1 !== null && event.target.value !== null);
+    setSelectedUser2((prev) => event.target.value);
+    setUsersSelected(
+      (prev) => selectedUser1 !== null && event.target.value !== null
+    );
   };
 
   function restartPage() {
@@ -54,11 +53,20 @@ const Game = () => {
 
   const handleButtonClick = async () => {
     if (selectedUser1 && selectedUser2) {
-      const winner =
-        card[0].damage > card[1].damage ? selectedUser1 : selectedUser2;
+      const [card1, card2] = card;
+      const { damage: damage1 } = card1;
+      const { damage: damage2 } = card2;
+      let winner;
+      if (damage1 === damage2) {
+        alert("A draw! Play the fight again");
+        restartPage();
+        return;
+      } else {
+        winner = damage1 > damage2 ? selectedUser1 : selectedUser2;
+      }
       alert(`${winner.name} wins!`);
       restartPage();
-      winner.numberWins += 1; // збільшуємо число перемог у переможця
+      winner.numberWins += 1; // increase the number of wins for the winner
       console.log(winner.numberWins);
       try {
         const response = await axios.patch(

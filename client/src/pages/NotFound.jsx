@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     height: "92vh",
     backgroundImage:
-      "url('https://media.licdn.com/dms/image/C5612AQGN00aSnczzRg/article-inline_image-shrink_1500_2232/0/1520203381486?e=1684368000&v=beta&t=Gr6rTYW40HL6jt_5Q0QlY0jI19SHccIrH-bnSVMHuSY')", // replace with your desired image URL
+      "url('https://media.licdn.com/dms/image/C5612AQGN00aSnczzRg/article-inline_image-shrink_1500_2232/0/1520203381486?e=1684368000&v=beta&t=Gr6rTYW40HL6jt_5Q0QlY0jI19SHccIrH-bnSVMHuSY')", // замініть цей URL на URL своєї фотографії
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",

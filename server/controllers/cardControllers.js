@@ -1,7 +1,8 @@
 import Card from "../models/cardModel.js";
+import { tryCatchAsync } from "../routes/tryCatchAsync.js";
 import { APIFeatures } from "../utils/apiFeatures.js";
 
-export const getAllCard = async (req, res) => {
+export const getAllCard = tryCatchAsync(async (req, res) => {
   const features = new APIFeatures(Card.find(), req.query).pagination();
   const cards = await features.query;
 
@@ -10,9 +11,9 @@ export const getAllCard = async (req, res) => {
     result: cards.length,
     cards,
   });
-};
+});
 
-export const createCard = async (req, res) => {
+export const createCard = tryCatchAsync(async (req, res) => {
   const newCard = await Card.create(req.body);
 
   res.status(201).json({
@@ -21,10 +22,10 @@ export const createCard = async (req, res) => {
       card: newCard,
     },
   });
-};
+});
 
-export const getOneRandomCard = async (req, res) => {
+export const getOneRandomCard = tryCatchAsync(async (req, res) => {
   const card = await Card.aggregate([{ $sample: { size: 2 } }]);
 
   res.status(200).json(card);
-};
+});
