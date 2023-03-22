@@ -12,7 +12,7 @@ import { styled } from "@mui/material/styles";
 import { CardMedia } from "@mui/material";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-import "./CartsList.css";
+import "./CardsList.css";
 import { GiCrossedSwords, GiHealthNormal } from "react-icons/gi";
 
 const Container = styled(Box)({
@@ -39,7 +39,7 @@ export const CardContentContainer = styled(CardContent)({
   fontWeight: "bold",
 });
 
-const CartsList = () => {
+const CardsList = () => {
   const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(3);
@@ -171,4 +171,4 @@ const CartsList = () => {
   );
 };
 
-export default CartsList;
+export default CardsList;

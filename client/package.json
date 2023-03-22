@@ -1,6 +1,11 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
+  },
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",

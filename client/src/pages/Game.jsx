@@ -5,7 +5,7 @@ import { CardMedia, Select, MenuItem } from "@material-ui/core";
 import "./Game.css";
 import { Box, Button, Grid } from "@mui/material";
 import { GiCrossedSwords, GiHealthNormal } from "react-icons/gi";
-import { CardContainer, CardContentContainer } from "./CartsList";
+import { CardContainer, CardContentContainer } from "./CardsList";
 import { stylesMain } from "../assets/stylesMUI/styles";
 
 const Game = () => {
@@ -83,7 +83,7 @@ const Game = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-game">
+      <div className="bg-game" role="banner">
         <div className="container" style={stylesMain.gameContainer}>
           {/* CONTAINER LEFT */}
           <div style={stylesMain}>

@@ -25,7 +25,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to={"/"} className="offDecorationLine nav-item">
+            <Link to={"*"} className="offDecorationLine nav-item">
               <div className="nav-link">Featured</div>
             </Link>
           </li>

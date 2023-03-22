@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Button,
   Card,
@@ -14,48 +15,65 @@ import "./Join.css";
 
 const Join = () => {
   const [name, setName] = useState("");
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [alertSeverity, setAlertSeverity] = useState("success");
-  const [alertMessage, setAlertMessage] = useState("");
+  const [alert, setAlert] = useState({
+    open: false,
+    severity: "",
+    message: "",
+  });
 
   const handleButtonClick = async (e) => {
     e.preventDefault();
     if (name.length < 5 || name.length > 15) {
-      setAlertSeverity("error");
-      setAlertMessage("Error: Name must be between 5 and 15 characters long.");
+      setAlert({
+        open: true,
+        severity: "error",
+        message: "Error: Name must be between 5 and 15 characters long.",
+      });
     } else {
       try {
-        await fetch("http://localhost:5000/api/v1/users", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name }),
-        });
-        setAlertSeverity("success");
-        setAlertMessage("Query processed successfully!");
+        const response = await axios.get(
+          `http://localhost:5000/api/v1/users?name=${name}`
+        );
+        if (response.data.data.users.length > 0) {
+          setAlert({
+            open: true,
+            severity: "error",
+            message:
+              "Error: This name is already taken. Please choose a different name.",
+          });
+        } else {
+          await axios.post("http://localhost:5000/api/v1/users", { name });
+          setAlert({
+            open: true,
+            severity: "success",
+            message: "Query processed successfully!",
+          });
+        }
+        setName("");
       } catch (error) {
-        console.error(error);
-        setAlertSeverity("error");
-        setAlertMessage("Error: Failed to process query.");
+        setAlert({
+          open: true,
+          severity: "error",
+          message: "Error: Failed to process query.",
+        });
       }
-      setName("");
     }
-    setAlertOpen(true);
   };
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      event.preventDefault(); // заборонити Enter в полі
-      event.target.blur(); // зняти фокус з поля
+      event.preventDefault();
+      event.target.blur();
     }
   };
 
   const handleAlertClose = () => {
-    setAlertOpen(false); // hide the alert
+    setAlert({ ...alert, open: false });
   };
 
   const handleResetButtonClick = () => {
     setName("");
-    setAlertOpen(false); // hide the alert
+    setAlert({ ...alert, open: false });
   };
 
   return (
@@ -68,7 +86,7 @@ const Join = () => {
               <TextField
                 onKeyPress={handleKeyPress}
                 sx={textFieldStyle}
-                id="filled-textarea"
+                id="join-textfield"
                 label="Join the Empire!"
                 variant="filled"
                 multiline
@@ -95,15 +113,16 @@ const Join = () => {
             </Box>
           </List>
           <Snackbar
-            open={alertOpen}
-            autoHideDuration={3000} // set the duration for the alert
+            open={alert.open}
+            autoHideDuration={3000}
             onClose={handleAlertClose}
+            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
           >
             <SnackbarContent
               style={{
-                backgroundColor: alertSeverity === "error" ? "red" : "green",
+                backgroundColor: alert.severity === "error" ? "red" : "green",
               }}
-              message={alertMessage}
+              message={alert.message}
             />
           </Snackbar>
         </Card>
