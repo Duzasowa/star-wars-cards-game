@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import {
   Box,
   Button,
@@ -10,12 +9,11 @@ import {
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { CardMedia, useMediaQuery } from "@mui/material";
+import { CardMedia } from "@mui/material";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import "./CartsList.css";
 import { GiCrossedSwords, GiHealthNormal } from "react-icons/gi";
-import { display } from "@mui/system";
 
 const Container = styled(Box)({
   borderRadius: "10px",
