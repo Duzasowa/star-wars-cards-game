@@ -1,0 +1,13 @@
+.bg-home {
+  background-image: url("../assets/images/bg-Home.png");
+  background-size: cover;
+  height: 91.6vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.offDecorationLine {
+  text-decoration: none;
+  color: #fff;
+}

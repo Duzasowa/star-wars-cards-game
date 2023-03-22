@@ -1,0 +1,8 @@
+.bg-game {
+  background-image: url("../assets/images/bg-Game.png");
+  background-size: cover;
+  height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
