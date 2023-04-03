@@ -3,7 +3,7 @@
 Built using ===> JavaScript, and HTML/CSS. \
 Frameworks ===> React, Node.js, Express.js \
 Libraries and tools ===> Axios, mongoose, MUI \
-Databases ===> MongoDB \
+Databases ===> MongoDB 
 
 ## MAIN PAGE
 ![Preview_1](https://user-images.githubusercontent.com/56549003/229493105-cdfdb36e-4555-43f7-9d49-873c0a71aa06.jpg)
