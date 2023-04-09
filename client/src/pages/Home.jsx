@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Card,
   Divider,
@@ -17,21 +17,46 @@ import NewspaperIcon from "@mui/icons-material/Newspaper";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import "./Home.css";
+import { fetchUsers } from "../store";
+
+export const useThunk = (thunk) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+
+  const runThunk = useCallback(
+    (arg) => {
+      setIsLoading(true);
+      dispatch(thunk(arg))
+        .unwrap()
+        .catch((err) => setError(err))
+        .finally(() => setIsLoading(false));
+    },
+    [dispatch, thunk]
+  );
+
+  return [runThunk, isLoading, error];
+};
 
 const Home = () => {
-  const [numUsers, setNumUser] = useState([0]);
+  const [doFetchUsers, isLoadingUsers, loadingUsersError] =
+    useThunk(fetchUsers);
+
+  const { data } = useSelector((state) => {
+    return state.users;
+  });
 
   useEffect(() => {
-    const loadUsersData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/api/v1/users`);
-        setNumUser(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    loadUsersData();
-  }, []);
+    doFetchUsers();
+  }, [doFetchUsers]);
+
+  if (isLoadingUsers) {
+    return <div style={{ color: "white" }}>Loading...</div>;
+  }
+
+  if (loadingUsersError) {
+    return <div style={{ color: "white" }}>Error loading data.</div>;
+  }
 
   return (
     <>
@@ -77,9 +102,7 @@ const Home = () => {
               <PeopleAltIcon style={iconStyle} />
               <ListItemText
                 sx={{ marginLeft: 2 }}
-                primary={`Players: ${
-                  numUsers.result ? numUsers.result : "Loading..."
-                }`}
+                primary={`Players: ${data.result ? data.result : "Loading..."}`}
               />
             </ListItemButton>
             <Link to={`/game`} className="offDecorationLine">
